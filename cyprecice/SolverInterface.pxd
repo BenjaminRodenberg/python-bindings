@@ -51,9 +51,9 @@ cdef extern from "precice/SolverInterface.hpp" namespace "precice":
 
         void setMeshVertices (int meshID, int size, const double* positions, int* ids)
 
-        int setMeshEdge (int meshID, int firstVertexID, int secondVertexID)
+        void setMeshEdge (int meshID, int firstVertexID, int secondVertexID)
 
-        int setMeshEdges (int meshID, int size, const int *vertices)
+        void setMeshEdges (int meshID, int size, const int *vertices)
 
         void setMeshTriangle (int meshID, int firstEdgeID, int secondEdgeID, int thirdEdgeID)
 
@@ -99,7 +99,7 @@ cdef extern from "precice/SolverInterface.hpp" namespace "precice":
 
         # Gradient related API 
 
-        bool isGradientDataRequired(int dataID) const;
+        bool requiresGradientDataFor(int dataID) const;
 
         void writeBlockVectorGradientData(int dataID, int size, const int* valueIndices, const double* gradientValues);
 

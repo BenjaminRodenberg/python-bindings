@@ -437,7 +437,7 @@ cdef class Interface:
 
     def set_mesh_edge (self, mesh_id, first_vertex_id, second_vertex_id):
         """
-        Sets mesh edge from vertex IDs, returns edge ID.
+        Sets a mesh edge from vertex IDs
 
         Parameters
         ----------
@@ -447,11 +447,6 @@ cdef class Interface:
             ID of the first vertex of the edge.
         secondVertexID : int
             ID of the second vertex of the edge.
-
-        Returns
-        -------
-        edge_id : int
-            ID of the edge.
 
         Notes
         -----
@@ -1174,7 +1169,7 @@ cdef class Interface:
 
         self.thisptr.writeBlockScalarGradientData (data_id, size, <const int*>_vertex_ids.data, <const double*>_gradientValues.data)
 
-    def is_gradient_data_required(self,data_id):
+    def requires_gradient_data_for(self,data_id):
         """
         Checks if the given data set requires gradient data. We check if the data object has been intialized with the gradient flag.
 
@@ -1192,9 +1187,9 @@ cdef class Interface:
         --------
         Check if gradient data is required for a dataID:
         >>> data_id = 1
-        >>> interface.is_gradient_data_required(data_id)
+        >>> interface.requires_gradient_data_for(data_id)
         """
-        return self.thisptr.isGradientDataRequired(data_id)
+        return self.thisptr.requiresGradientDataFor(data_id)
 
 
     def set_mesh_access_region (self, mesh_id, bounding_box):

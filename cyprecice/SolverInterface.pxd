@@ -29,15 +29,13 @@ cdef extern from "precice/SolverInterface.hpp" namespace "precice":
 
         bool isTimeWindowComplete() const
 
-        bool hasToEvaluateSurrogateModel () const
+        # requirements
 
-        bool hasToEvaluateFineModel () const
+        bool requiresInitialData()
 
-        # action methods
+        bool requiresWritingCheckpoint()
 
-        bool isActionRequired (const string& action) const
-
-        void markActionFulfilled (const string& action)
+        bool requiresReadingCheckpoint()
 
         # mesh access
 
@@ -47,27 +45,27 @@ cdef extern from "precice/SolverInterface.hpp" namespace "precice":
 
         set[int] getMeshIDs ()
 
-        bool isMeshConnectivityRequired (int meshID) const
+        bool requiresMeshConnectivityFor (int meshID) const
 
         int setMeshVertex (int meshID, const double* position)
 
-        int getMeshVertexSize (int meshID) const
-
         void setMeshVertices (int meshID, int size, const double* positions, int* ids)
-
-        void getMeshVertices (int meshID, int size, const int* ids, double* positions) const
-
-        void getMeshVertexIDsFromPositions (int meshID, int size, double* positions, int* ids) const
 
         int setMeshEdge (int meshID, int firstVertexID, int secondVertexID)
 
+        int setMeshEdges (int meshID, int size, const int *vertices)
+
         void setMeshTriangle (int meshID, int firstEdgeID, int secondEdgeID, int thirdEdgeID)
 
-        void setMeshTriangleWithEdges (int meshID, int firstVertexID, int secondVertexID, int thirdVertexID)
+        void setMeshTriangles (int meshID, int size, const int *vertices)
 
         void setMeshQuad (int meshID, int firstEdgeID, int secondEdgeID, int thirdEdgeID, int fourthEdgeID)
 
-        void setMeshQuadWithEdges (int meshID, int firstVertexID, int secondVertexID, int thirdVertexID, int fourthVertexID)
+        void setMeshQuads (int meshID, int size, const int *vertices)
+
+        void setMeshTetrahedron (int meshID, int firstVertexID, int secondVertexID, int thirdVertexID, fourthVertexID)
+
+        void setMeshTetrahedra (int meshID, int size, const int *vertices)
 
         # data access
 
@@ -116,11 +114,3 @@ cdef extern from "precice/SolverInterface.hpp" namespace "precice":
         void setMeshAccessRegion (const int meshID, const double* boundingBox) const
 
         void getMeshVerticesAndIDs (const int meshID, const int size, int* ids, double* coordinates) const
-
-cdef extern from "precice/SolverInterface.hpp" namespace "precice":
-    string getVersionInformation()
-
-cdef extern from "precice/SolverInterface.hpp"  namespace "precice::constants":
-    const string& actionWriteInitialData()
-    const string& actionWriteIterationCheckpoint()
-    const string& actionReadIterationCheckpoint()

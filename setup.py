@@ -138,7 +138,7 @@ my_cmdclass = {
 # build precice.so python extension to be added to "PYTHONPATH" later
 setup(
     name=APPNAME,
-    version=versioneer.get_version(),
+    version="0.1.2.3",
     cmdclass=versioneer.get_cmdclass(my_cmdclass),
     description='Python language bindings for the preCICE coupling library',
     long_description=long_description,

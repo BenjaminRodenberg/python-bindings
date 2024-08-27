@@ -2,7 +2,7 @@ name: Update build environment
 
 on:
   workflow_dispatch:      # Trigger by hand from the UI
-    input:
+    inputs:
       tag:
         description: 'tag for docker image'
         required: true
